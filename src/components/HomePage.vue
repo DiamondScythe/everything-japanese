@@ -1,10 +1,9 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <v-container>
       <v-card>
-        <v-card-title> My Vuetify Component </v-card-title>
-        <v-card-text> This is a Vuetify component! </v-card-text>
+        <v-card-title> Welcome! </v-card-title>
+        <v-card-text> Your journey starts here... Good luck! </v-card-text>
       </v-card>
     </v-container>
   </div>
