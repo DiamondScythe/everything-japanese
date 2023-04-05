@@ -10,6 +10,7 @@
     <v-navigation-drawer
       v-if="showDrawer"
       v-model="drawer"
+      disable-resize-watcher
       app
     >
       <v-list-item>
@@ -82,5 +83,7 @@
         return this.$route.path !== '/login' && this.$route.path !== '/welcome'
       },
     },
+    methods: {
+    }
   }
 </script>

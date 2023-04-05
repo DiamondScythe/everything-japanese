@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LevelsView from "../views/LevelsView.vue";
 import GrammarView from "../views/GrammarView.vue";
+import LoginView from "../views/auth/LoginView.vue"
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginView,
+  }
 ];
 
 const router = new VueRouter({
