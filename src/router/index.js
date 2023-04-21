@@ -3,7 +3,14 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LevelsView from "../views/LevelsView.vue";
 import GrammarView from "../views/GrammarView.vue";
-import LoginView from "../views/auth/LoginView.vue"
+import LoginView from "../views/auth/LoginView.vue";
+import LessonView from "../views/lesson/Lesson.vue";
+import LessonDetailsView from "../views/lesson/LessonDetails.vue";
+import WatchView from "../views/WatchView.vue";
+
+import { getJwtToken } from "@/utils/auth";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 Vue.use(VueRouter);
 
@@ -22,6 +29,7 @@ const routes = [
     path: "/grammar",
     name: "Grammar",
     component: GrammarView,
+    meta: { requiresAuth: true },
   },
   {
     path: "/about",
@@ -36,13 +44,94 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginView,
-  }
+  },
+  {
+    path: "/lesson",
+    name: "Lesson",
+    component: LessonView,
+    props: true,
+  },
+  {
+    path: "/lesson/:id",
+    name: "LessonDetails",
+    component: LessonDetailsView,
+    props: true,
+  },
+  {
+    path: "/watch",
+    name: "Watch",
+    component: WatchView,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const token = getJwtToken();
+  //add some more server side auth here
+
+  // if (requiresAuth && !token) {
+  //   next("/login");
+  // } else {
+  //   next();
+  // }
+  // console.log(token);
+
+  // if (requiresAuth && token) {
+  //   axios
+  //     .get("http://localhost:8081/userAuth", {
+  //       headers: {
+  //         Authorization: "Bearer " + Cookies.get("jwt"), // get JWT token from browser's cookies
+  //       },
+  //     })
+  //     .then((response) => {
+  //       if (response.data.isAuthenticated) {
+  //         console.log("User info:", response.data.user);
+  //         next();
+  //       } else {
+  //         next("/login");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       next("/login");
+  //     });
+  // } else {
+  //   next();
+  //   console.log("auth failed");
+  // }
+
+  if (requiresAuth) {
+    if (token) {
+      axios
+        .get("http://localhost:8081/userAuth", {
+          headers: {
+            Authorization: "Bearer " + Cookies.get("jwt"), // get JWT token from browser's cookies
+          },
+        })
+        .then((response) => {
+          if (response.data.isAuthenticated) {
+            console.log("User info:", response.data.user);
+            next();
+          } else {
+            next("/login");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          next("/login");
+        });
+    } else {
+      next("/login");
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

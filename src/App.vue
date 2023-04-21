@@ -26,10 +26,7 @@
 
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-      >
+      <v-list dense nav>
         <v-list-item
           v-for="item in items"
           :key="item.title"
@@ -48,11 +45,11 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-    app
-    src="japan3.jpg"
-    >
-      <v-app-bar-nav-icon v-if="showDrawer" @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar app src="japan3.jpg">
+      <v-app-bar-nav-icon
+        v-if="showDrawer"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
 
       <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
     </v-app-bar>
@@ -62,28 +59,29 @@
 
     <!-- main content goes here-->
     <v-main>
-      <router-view></router-view>  
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data: () => (
-      { drawer: false,
-        items: [
-          { title: 'Home', icon: 'mdi-home', to:"/home" },
-          { title: 'Levels', icon: 'mdi-view-grid', to:"/levels" },
-          { title: 'Grammar', icon: 'mdi-help-box', to:"/grammar" },
-        ], }
-      ),
-    computed: {
-      showDrawer() {
-        // Hide the drawer on the login and welcome pages
-        return this.$route.path !== '/login' && this.$route.path !== '/welcome'
-      },
+export default {
+  data: () => ({
+    drawer: false,
+    items: [
+      { title: "Home", icon: "mdi-home", to: "/home" },
+      { title: "Levels", icon: "mdi-view-grid", to: "/levels" },
+      { title: "Grammar", icon: "mdi-help-box", to: "/grammar" },
+      { title: "Lessons", icon: "mdi-help-box", to: "/lesson" },
+      { title: "Watch", icon: "mdi-help-box", to: "/watch" },
+    ],
+  }),
+  computed: {
+    showDrawer() {
+      // Hide the drawer on the login and welcome pages
+      return this.$route.path !== "/login" && this.$route.path !== "/welcome";
     },
-    methods: {
-    }
-  }
+  },
+  methods: {},
+};
 </script>
