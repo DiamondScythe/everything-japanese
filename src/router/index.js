@@ -7,6 +7,7 @@ import LoginView from "../views/auth/LoginView.vue";
 import LessonView from "../views/lesson/Lesson.vue";
 import LessonDetailsView from "../views/lesson/LessonDetails.vue";
 import WatchView from "../views/WatchView.vue";
+import LandingView from "../views/LandingView.vue";
 
 import { getJwtToken } from "@/utils/auth";
 import axios from "axios";
@@ -15,6 +16,7 @@ import Cookies from "js-cookie";
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", name: "LandingView", component: LandingView },
   {
     path: "/home",
     name: "Home",
@@ -73,38 +75,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const token = getJwtToken();
-  //add some more server side auth here
-
-  // if (requiresAuth && !token) {
-  //   next("/login");
-  // } else {
-  //   next();
-  // }
-  // console.log(token);
-
-  // if (requiresAuth && token) {
-  //   axios
-  //     .get("http://localhost:8081/userAuth", {
-  //       headers: {
-  //         Authorization: "Bearer " + Cookies.get("jwt"), // get JWT token from browser's cookies
-  //       },
-  //     })
-  //     .then((response) => {
-  //       if (response.data.isAuthenticated) {
-  //         console.log("User info:", response.data.user);
-  //         next();
-  //       } else {
-  //         next("/login");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       next("/login");
-  //     });
-  // } else {
-  //   next();
-  //   console.log("auth failed");
-  // }
 
   if (requiresAuth) {
     if (token) {
