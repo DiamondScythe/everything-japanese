@@ -26,7 +26,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://localhost:8081/lessons`)
+      .get(`http://localhost:3000/lessons`)
       .then((res) => {
         this.lessons = res.data.lessons;
         console.log(res);

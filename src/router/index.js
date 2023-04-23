@@ -79,7 +79,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth) {
     if (token) {
       axios
-        .get("http://localhost:8081/userAuth", {
+        .get("http://localhost:3000/userAuth", {
           headers: {
             Authorization: "Bearer " + Cookies.get("jwt"), // get JWT token from browser's cookies
           },

@@ -78,7 +78,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://localhost:8081/lessons`)
+      .get(`http://localhost:3000/lessons`)
       .then((res) => {
         this.lesson = res.data.lessons.find(
           (lesson) => lesson.chapter == this.id

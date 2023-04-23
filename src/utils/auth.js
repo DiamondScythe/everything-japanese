@@ -16,7 +16,7 @@ export function getJwtToken() {
 
 export async function checkAuthStatus() {
   try {
-    const response = await axios.get("http://localhost:8081/userAuth", {
+    const response = await axios.get("http://localhost:3000/userAuth", {
       headers: {
         Authorization: "Bearer " + Cookies.get("jwt"),
       },
