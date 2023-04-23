@@ -9,6 +9,7 @@ import LessonView from "../views/lesson/Lesson.vue";
 import LessonDetailsView from "../views/lesson/LessonDetails.vue";
 import WatchView from "../views/WatchView.vue";
 import LandingView from "../views/LandingView.vue";
+import ReviewView from "../views/review/ReviewView.vue";
 
 import { getJwtToken } from "@/utils/auth";
 import axios from "axios";
@@ -71,6 +72,12 @@ const routes = [
     path: "/watch",
     name: "Watch",
     component: WatchView,
+  },
+  {
+    path: "/review",
+    name: "Review",
+    component: ReviewView,
+    meta: { requiresAuth: true },
   },
 ];
 
