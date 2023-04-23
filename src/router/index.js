@@ -2,7 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LevelsView from "../views/LevelsView.vue";
-import GrammarView from "../views/GrammarView.vue";
+import GrammarView from "../views/grammar/GrammarView.vue";
+import GrammarLearnView from "../views/grammar/GrammarLearnView.vue";
 import LoginView from "../views/auth/LoginView.vue";
 import LessonView from "../views/lesson/Lesson.vue";
 import LessonDetailsView from "../views/lesson/LessonDetails.vue";
@@ -32,6 +33,13 @@ const routes = [
     name: "Grammar",
     component: GrammarView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/grammar/learn/:id",
+    name: "GrammarLearn",
+    component: GrammarLearnView,
+    meta: { requiresAuth: true },
+    props: true,
   },
   {
     path: "/about",

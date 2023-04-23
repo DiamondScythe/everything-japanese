@@ -4,7 +4,7 @@
       <v-list-item
         v-for="lesson in grammar"
         :key="lesson.lessonNumber"
-        :to="'/lesson/' + lesson.lessonNumber"
+        :to="'/grammar/learn/' + lesson.lessonNumber"
       >
         <v-list-item-title
           >Lesson No.{{ lesson.lessonNumber }}:
