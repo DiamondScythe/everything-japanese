@@ -26,7 +26,7 @@
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-card-text>{{ answer }}</v-card-text>
+            <v-card-text v-if="showAnswer">{{ answer }}</v-card-text>
           </v-col>
         </v-row>
       </v-card>
@@ -52,6 +52,7 @@ export default {
       currentInput: "",
       currentIndex: 0,
       answer: "",
+      showAnswer: true,
     };
   },
   watch: {
@@ -69,13 +70,35 @@ export default {
   methods: {
     checkInput(newValue) {
       //checks if newValue is equal to currentRomaji or currentKana
-      if (newValue === this.currentRomaji || newValue === this.currentKana) {
+      if (this.checkAnswer(newValue) === "correct") {
         this.nextKana();
-        setTimeout(() => {
-          this.currentInput = "";
-        }, 100);
-      } else {
+        // setTimeout(() => {
+        //   this.currentInput = "";
+        //   this.answer = "";
+        // }, 100);
+      }
+      if (this.checkAnswer(newValue) === "incorrect") {
         this.displayAnswer();
+      }
+    },
+    checkAnswer(newValue) {
+      if (newValue === this.currentKana) {
+        return "correct";
+      } else {
+        if (newValue.length < this.currentRomaji.length) {
+          for (let i = 0; i < newValue.length; i++) {
+            if (newValue[i] !== this.currentRomaji[i]) {
+              return "incorrect";
+            }
+          }
+          return "wait";
+        } else {
+          if (newValue === this.currentRomaji) {
+            return "correct";
+          } else {
+            return "incorrect";
+          }
+        }
       }
     },
     //// Define a shuffle function using the Fisher-Yates algorithm
@@ -94,16 +117,30 @@ export default {
       if (this.currentIndex === this.currentArray.length - 1) {
         this.shuffleCurrentArray();
         this.currentIndex = 0;
-        this.currentKana = this.currentArray[this.currentIndex].kana;
-        this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+        this.updateFields();
       } else {
         this.currentIndex++;
-        this.currentKana = this.currentArray[this.currentIndex].kana;
-        this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+        this.updateFields();
       }
     },
     displayAnswer() {
       this.answer = this.currentKana + " is " + this.currentRomaji;
+    },
+    updateFields() {
+      //hide answer because there's a split second where the currentInput differs from the currentRomaji/currentKana for some reason
+      this.hideAnswer();
+      this.currentKana = this.currentArray[this.currentIndex].kana;
+      this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+      setTimeout(() => {
+        this.currentInput = "";
+        this.answer = "";
+      }, 20);
+    },
+    hideAnswer() {
+      this.showAnswer = false;
+      setTimeout(() => {
+        this.showAnswer = true;
+      }, 100); // hide for 100 miliseconds
     },
   },
 };
