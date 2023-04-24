@@ -88,9 +88,9 @@ export default {
     drawer: false,
     items: [
       { title: "Home", icon: "mdi-home", to: "/home" },
-      { title: "Levels", icon: "mdi-view-grid", to: "/levels" },
+      { title: "Kana", icon: "mdi-script", to: "/kana" },
+      { title: "Vocab", icon: "mdi-book-open-variant", to: "/vocab" },
       { title: "Grammar", icon: "mdi-file-document", to: "/grammar" },
-      { title: "Lessons", icon: "mdi-help-box", to: "/lesson" },
       { title: "Review", icon: "mdi-cards", to: "/review" },
       { title: "Watch", icon: "mdi-help-box", to: "/watch" },
     ],

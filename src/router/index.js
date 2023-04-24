@@ -1,15 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import LevelsView from "../views/LevelsView.vue";
 import GrammarView from "../views/grammar/GrammarView.vue";
 import GrammarLearnView from "../views/grammar/GrammarLearnView.vue";
 import LoginView from "../views/auth/LoginView.vue";
-import LessonView from "../views/lesson/Lesson.vue";
-import LessonDetailsView from "../views/lesson/LessonDetails.vue";
 import WatchView from "../views/WatchView.vue";
 import LandingView from "../views/LandingView.vue";
 import ReviewView from "../views/review/ReviewView.vue";
+import KanaView from "../views/kana/KanaView.vue";
+import VocabView from "../views/vocab/VocabView.vue";
 
 import { getJwtToken } from "@/utils/auth";
 import axios from "axios";
@@ -23,11 +22,6 @@ const routes = [
     path: "/home",
     name: "Home",
     component: HomeView,
-  },
-  {
-    path: "/levels",
-    name: "Levels",
-    component: LevelsView,
   },
   {
     path: "/grammar",
@@ -57,18 +51,6 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/lesson",
-    name: "Lesson",
-    component: LessonView,
-    props: true,
-  },
-  {
-    path: "/lesson/:id",
-    name: "LessonDetails",
-    component: LessonDetailsView,
-    props: true,
-  },
-  {
     path: "/watch",
     name: "Watch",
     component: WatchView,
@@ -77,6 +59,18 @@ const routes = [
     path: "/review",
     name: "Review",
     component: ReviewView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/kana",
+    name: "Kana",
+    component: KanaView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/vocab",
+    name: "Vocab",
+    component: VocabView,
     meta: { requiresAuth: true },
   },
 ];
