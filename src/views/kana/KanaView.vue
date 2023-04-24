@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container class="card-container">
-      <v-card elevation="3" outlined shaped tile height="400px" width="1000px">
+      <v-card elevation="3" outlined shaped tile height="420px" width="1000px">
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
             <v-card-title class="justify-center"></v-card-title>
@@ -21,12 +21,17 @@
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-text-field v-model="currentInput"></v-text-field>
+            <v-text-field
+              v-model="currentInput"
+              class="centered-input"
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-card-text v-if="showAnswer">{{ answer }}</v-card-text>
+            <v-card-text v-if="showAnswer" class="answer">{{
+              answer
+            }}</v-card-text>
           </v-col>
         </v-row>
       </v-card>
@@ -146,11 +151,11 @@ export default {
 };
 </script>
 
-<style>
-.input {
+<style scoped>
+.answer {
   text-align: center;
 }
-.text-center {
+.centered-input >>> input {
   text-align: center;
 }
 .card-container {
