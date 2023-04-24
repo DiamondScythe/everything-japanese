@@ -14,6 +14,9 @@
           <v-card-actions>
             <v-btn color="primary" @click="previousCard">Previous</v-btn>
             <v-btn color="primary" @click="discardCard">Next</v-btn>
+            <v-btn color="primary" @click="addFlashcards()"
+              >Add Flashcards</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-slide-x-transition>
@@ -41,6 +44,20 @@ export default {
     };
   },
   methods: {
+    addFlashcards() {
+      axios
+        .post(`http://localhost:3000/api/addFlashcards/`, {
+          examples: this.examples,
+          userId: this.user._id,
+          lessonNumber: this.lessons.lessonNumber,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     previousCard() {
       // Perform any necessary actions based on the discarded card
       // ...
@@ -69,15 +86,7 @@ export default {
         } else {
           // Handle end of stack
           //post the array of examples to the api so the server can save the examples to flashcards
-          axios
-            .post(`http://localhost:3000/api/addFlashcards/`, {
-              examples: this.examples,
-              userId: this.user._id,
-              lessonNumber: this.lessons.lessonNumber,
-            })
-            .then((res) => {
-              console.log(res);
-            });
+          this.addFlashcards();
         }
         this.transition = false;
       }, 0); // adjust the duration of the animation as needed
