@@ -14,12 +14,19 @@
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-card-title class="justify-center">あ</v-card-title>
+            <v-card-title class="justify-center">{{
+              currentKana
+            }}</v-card-title>
           </v-col>
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-text-field></v-text-field>
+            <v-text-field v-model="currentInput"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col sm="12" lg="6" offset-lg="3">
+            <v-card-text>{{ answer }}</v-card-text>
           </v-col>
         </v-row>
       </v-card>
@@ -28,8 +35,8 @@
 </template>
 
 <script>
-import hiragana from "@/data/kana.js";
-import katakana from "@/data/kana.js";
+import hiragana from "@/data/hiragana.js";
+import katakana from "@/data/katakana.js";
 
 export default {
   name: "KanaView",
@@ -39,11 +46,66 @@ export default {
     return {
       hiragana: hiragana,
       katakana: katakana,
+      currentArray: null,
+      currentKana: null,
+      currentRomaji: null,
+      currentInput: "",
+      currentIndex: 0,
+      answer: "",
     };
   },
+  watch: {
+    currentInput(newValue, oldValue) {
+      this.checkInput(newValue);
+    },
+  },
   computed: {},
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.currentArray = this.hiragana;
+    this.shuffleCurrentArray();
+    this.currentKana = this.currentArray[this.currentIndex].kana;
+    this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+  },
+  methods: {
+    checkInput(newValue) {
+      //checks if newValue is equal to currentRomaji or currentKana
+      if (newValue === this.currentRomaji || newValue === this.currentKana) {
+        this.nextKana();
+        setTimeout(() => {
+          this.currentInput = "";
+        }, 100);
+      } else {
+        this.displayAnswer();
+      }
+    },
+    //// Define a shuffle function using the Fisher-Yates algorithm
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    },
+    shuffleCurrentArray() {
+      this.shuffleArray(this.currentArray);
+    },
+    nextKana() {
+      //checks if currentIndex is equal to currentArray.length
+      //if true, shuffle currentArray and set currentIndex to 0
+      if (this.currentIndex === this.currentArray.length - 1) {
+        this.shuffleCurrentArray();
+        this.currentIndex = 0;
+        this.currentKana = this.currentArray[this.currentIndex].kana;
+        this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+      } else {
+        this.currentIndex++;
+        this.currentKana = this.currentArray[this.currentIndex].kana;
+        this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+      }
+    },
+    displayAnswer() {
+      this.answer = this.currentKana + " is " + this.currentRomaji;
+    },
+  },
 };
 </script>
 
