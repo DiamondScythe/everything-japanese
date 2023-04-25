@@ -8,7 +8,7 @@ const opts = {
   theme: {
     themes: {
       light: {
-        primary: "#ee67cf", // change this to your desired color
+        primary: "#f08fae", // change this to your desired color
         secondary: "#424242",
         accent: "#ff82ec",
         error: "#FF5252",

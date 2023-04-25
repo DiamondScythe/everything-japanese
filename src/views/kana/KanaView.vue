@@ -36,6 +36,29 @@
         </v-row>
       </v-card>
     </v-container>
+
+    <v-container class="card-container">
+      <v-card elevation="3" outlined shaped tile height="auto" width="1000px">
+        <v-row>
+          <v-col sm="12" lg="12">
+            <v-btn text @click="show = !show" block> Toggle settings</v-btn>
+          </v-col>
+        </v-row>
+        <v-expand-transition>
+          <div v-show="show" class="radio-group-container">
+            <v-radio-group v-model="selectedOption" row class="radio-group">
+              <v-radio
+                v-for="(option, index) in options"
+                :key="index"
+                :label="option.text"
+                :value="option.value"
+                color="primary"
+              />
+            </v-radio-group>
+          </div>
+        </v-expand-transition>
+      </v-card>
+    </v-container>
   </div>
 </template>
 
@@ -58,29 +81,31 @@ export default {
       currentIndex: 0,
       answer: "",
       showAnswer: true,
+      show: false,
+      options: [
+        { text: "Hiragana", value: "hiragana" },
+        { text: "Katakana", value: "katakana" },
+      ],
+      selectedOption: "hiragana",
     };
   },
   watch: {
     currentInput(newValue, oldValue) {
       this.checkInput(newValue);
     },
+    selectedOption(newValue, oldValue) {
+      this.initializeKana();
+    },
   },
   computed: {},
   mounted() {
-    this.currentArray = this.hiragana;
-    this.shuffleCurrentArray();
-    this.currentKana = this.currentArray[this.currentIndex].kana;
-    this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+    this.initializeKana();
   },
   methods: {
     checkInput(newValue) {
       //checks if newValue is equal to currentRomaji or currentKana
       if (this.checkAnswer(newValue) === "correct") {
         this.nextKana();
-        // setTimeout(() => {
-        //   this.currentInput = "";
-        //   this.answer = "";
-        // }, 100);
       }
       if (this.checkAnswer(newValue) === "incorrect") {
         this.displayAnswer();
@@ -147,13 +172,32 @@ export default {
         this.showAnswer = true;
       }, 100); // hide for 100 miliseconds
     },
+
+    initializeKana() {
+      this.currentIndex = 0;
+      if (this.selectedOption === "hiragana") {
+        this.currentArray = this.hiragana;
+      } else {
+        this.currentArray = this.katakana;
+      }
+      this.shuffleCurrentArray();
+      this.currentKana = this.currentArray[this.currentIndex].kana;
+      this.currentRomaji = this.currentArray[this.currentIndex].romaji;
+    },
   },
 };
 </script>
 
 <style scoped>
+.radio-group-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .answer {
   text-align: center;
+  font-size: 1.1rem;
 }
 .centered-input >>> input {
   text-align: center;
