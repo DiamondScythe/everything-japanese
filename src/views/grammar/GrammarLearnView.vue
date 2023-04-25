@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{ parts }}
     <v-container class="card-container">
       <v-slide-x-transition mode="out-in">
         <v-card
@@ -25,7 +26,7 @@
           </v-row>
           <v-row>
             <v-col sm="12" lg="10" offset-lg="1">
-              <v-card-text style="color: black">{{
+              <v-card-text style="color: black; white-space: pre-line">{{
                 card.text
               }}</v-card-text></v-col
             >
