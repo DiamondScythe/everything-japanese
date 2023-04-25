@@ -66,7 +66,7 @@
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
 
-      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
     </v-app-bar>
 
     <!-- Add the v-overlay component here -->
@@ -110,6 +110,12 @@ export default {
     }
   },
   computed: {
+    pageTitle() {
+      if (this.$route.name === "Grammar learn") {
+        return "Grammar Lesson " + this.$route.params.id;
+      }
+      return this.$route.name;
+    },
     showDrawer() {
       // Hide the drawer on the login and welcome pages
       return this.$route.path !== "/login" && this.$route.path !== "/welcome";

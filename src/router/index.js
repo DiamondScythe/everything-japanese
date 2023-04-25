@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: "/grammar/learn/:id",
-    name: "GrammarLearn",
+    name: "Grammar learn",
     component: GrammarLearnView,
     meta: { requiresAuth: true },
     props: true,
