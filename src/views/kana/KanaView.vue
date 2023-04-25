@@ -43,7 +43,7 @@
       <v-card elevation="3" outlined shaped tile height="auto" width="1000px">
         <v-row>
           <v-col sm="12" lg="12">
-            <v-btn text @click="show = !show" block tile="true">
+            <v-btn text @click="show = !show" block tile>
               Toggle settings</v-btn
             >
           </v-col>
@@ -222,7 +222,7 @@ export default {
   align-items: center;
 }
 
-.container {
+/* .container {
   border: 1px solid green;
 }
 .row {
@@ -230,5 +230,5 @@ export default {
 }
 .col {
   border: 1px solid blue;
-}
+} */
 </style>
