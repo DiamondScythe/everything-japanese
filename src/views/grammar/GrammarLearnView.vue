@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    {{ parts }}
     <v-container class="card-container">
       <v-slide-x-transition mode="out-in">
         <v-card
@@ -30,6 +29,13 @@
                 card.text
               }}</v-card-text></v-col
             >
+          </v-row>
+          <v-row v-if="card.type === 'Example'">
+            <v-col sm="12" lg="10" offset-lg="1">
+              <v-btn text color="primary" @click="playAudio(card.audioFileName)"
+                >Play audio</v-btn
+              >
+            </v-col>
           </v-row>
         </v-card>
       </v-slide-x-transition>
@@ -149,6 +155,7 @@ export default {
               id: id++,
               type: "Example",
               text: `${example.example} - ${example.translation}`,
+              audioFileName: example.audioFileName,
             };
 
             cards.push(exampleCard);
@@ -182,6 +189,10 @@ export default {
     finishLesson() {
       this.addFlashcards();
       this.$router.push({ name: "Home" });
+    },
+    playAudio(audioFileName) {
+      const audio = new Audio(`http://localhost:3000/audio/${audioFileName}`);
+      audio.play();
     },
   },
   async mounted() {
