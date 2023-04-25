@@ -23,6 +23,18 @@
               }}</v-card-title>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col sm="12" lg="6" offset-lg="3">
+              <div class="audio-button">
+                <v-btn
+                  text
+                  color="primary"
+                  @click="playAudio(currentCard.audioFileName)"
+                  >Play audio</v-btn
+                >
+              </div>
+            </v-col>
+          </v-row>
           <v-row v-if="showAnswer">
             <v-col sm="12" lg="6" offset-lg="3">
               <v-card-title class="justify-center">{{
@@ -208,6 +220,10 @@ export default {
           console.log(err);
         });
     },
+    playAudio(audioFileName) {
+      const audio = new Audio(`http://localhost:3000/audio/${audioFileName}`);
+      audio.play();
+    },
   },
 };
 </script>
@@ -215,6 +231,12 @@ export default {
 <style scoped>
 .card-container {
   padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audio-button {
   display: flex;
   justify-content: center;
   align-items: center;
