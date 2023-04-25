@@ -124,7 +124,7 @@ export default {
         } else {
           // Handle end of stack
           //post the array of examples to the api so the server can save the examples to flashcards
-          this.addFlashcards();
+          this.finishLesson();
         }
         this.transition = false;
       }, 0); // adjust the duration of the animation as needed
@@ -177,6 +177,10 @@ export default {
         delete obj["_id"];
         return obj;
       });
+    },
+    finishLesson() {
+      this.addFlashcards();
+      this.$router.push({ name: "Home" });
     },
   },
   async mounted() {

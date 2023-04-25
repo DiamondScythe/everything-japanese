@@ -222,7 +222,7 @@ export default {
   align-items: center;
 }
 
-.container {
+/* .container {
   border: 1px solid green;
 }
 .row {
@@ -230,5 +230,5 @@ export default {
 }
 .col {
   border: 1px solid blue;
-}
+} */
 </style>

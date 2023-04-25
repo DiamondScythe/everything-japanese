@@ -19,8 +19,10 @@
         <v-btn color="primary" @click="answer(5)">5</v-btn>
       </div>
     </div>
-    <div v-else>
-      <h1>There are no flashcards to review right now.</h1>
+    <div v-else class="card-container">
+      <div class="notify-message">
+        {{ noFlashcardsMessage }}
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +42,8 @@ export default {
       sortedFlashcards: [],
       showAnswer: false,
       showReview: true,
+      noFlashcardsMessage:
+        "You have no flashcards to review right now. Check back later, or add some flashcards to your deck by finishing new lessons!",
     };
   },
   async mounted() {
@@ -110,3 +114,29 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card-container {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notify-message {
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* .container {
+  border: 1px solid green;
+}
+.row {
+  border: 1px solid red;
+}
+.col {
+  border: 1px solid blue;
+} */
+</style>
