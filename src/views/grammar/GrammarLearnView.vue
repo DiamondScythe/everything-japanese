@@ -1,26 +1,52 @@
 <template>
   <div class="home">
-    {{ examples }}
-    <br />
-    <v-container>
+    <v-container class="card-container">
       <v-slide-x-transition mode="out-in">
         <v-card
           v-for="(card, index) in cards"
           :key="card.id"
           v-if="index === activeCardIndex"
+          elevation="3"
+          outlined
+          shaped
+          tile
+          height="600px"
+          width="1000px"
         >
-          <v-card-title>{{ card.type }}</v-card-title>
-          <v-card-text style="color: black">{{ card.text }}</v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" @click="previousCard">Previous</v-btn>
-            <v-btn color="primary" @click="discardCard">Next</v-btn>
-            <v-btn color="primary" @click="addFlashcards()"
-              >Add Flashcards</v-btn
+          <v-row>
+            <v-col sm="12" lg="6" offset-lg="3">
+              <v-card-title class="justify-center"></v-card-title>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col sm="12" lg="10" offset-lg="1">
+              <v-card-title>{{ card.type }}</v-card-title></v-col
             >
-          </v-card-actions>
+          </v-row>
+          <v-row>
+            <v-col sm="12" lg="10" offset-lg="1">
+              <v-card-text style="color: black">{{
+                card.text
+              }}</v-card-text></v-col
+            >
+          </v-row>
         </v-card>
       </v-slide-x-transition>
     </v-container>
+
+    <div>
+      <v-row>
+        <v-col sm="12" lg="6" offset-lg="3">
+          <v-card-actions class="navigate-buttons">
+            <v-btn color="primary" @click="previousCard">Previous</v-btn>
+            <v-btn color="primary" @click="discardCard">{{ nextText }}</v-btn>
+          </v-card-actions>
+          <div class="navigate-buttons">
+            Current page: {{ activeCardIndex + 1 }} / {{ cards.length }}
+          </div>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 
@@ -42,6 +68,18 @@ export default {
       activeCardIndex: 0,
       transition: false,
     };
+  },
+  computed: {
+    isFinalCard() {
+      return this.activeCardIndex === this.cards.length - 1;
+    },
+    nextText() {
+      if (this.isFinalCard) {
+        return "Finish lesson and add flashcards to your deck";
+      } else {
+        return "Next";
+      }
+    },
   },
   methods: {
     addFlashcards() {
@@ -98,7 +136,7 @@ export default {
       data.parts.forEach((part) => {
         const explanationCard = {
           id: id++,
-          type: "explanation",
+          type: "Explanation",
           text: part.explanation,
         };
 
@@ -108,7 +146,7 @@ export default {
           part.examples.forEach((example) => {
             const exampleCard = {
               id: id++,
-              type: "example",
+              type: "Example",
               text: `${example.example} - ${example.translation}`,
             };
 
@@ -162,4 +200,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card-container {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navigate-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .container {
+  border: 1px solid green;
+}
+.row {
+  border: 1px solid red;
+}
+.col {
+  border: 1px solid blue;
+} */
+</style>
