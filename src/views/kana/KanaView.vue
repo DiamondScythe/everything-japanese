@@ -9,7 +9,9 @@
         </v-row>
         <v-row>
           <v-col sm="12" lg="6" offset-lg="3">
-            <v-card-title class="justify-center">Kana practice</v-card-title>
+            <v-card-title class="justify-center"
+              >Score: {{ score }}</v-card-title
+            >
           </v-col>
         </v-row>
         <v-row>
@@ -41,7 +43,9 @@
       <v-card elevation="3" outlined shaped tile height="auto" width="1000px">
         <v-row>
           <v-col sm="12" lg="12">
-            <v-btn text @click="show = !show" block> Toggle settings</v-btn>
+            <v-btn text @click="show = !show" block tile="true">
+              Toggle settings</v-btn
+            >
           </v-col>
         </v-row>
         <v-expand-transition>
@@ -87,13 +91,14 @@ export default {
         { text: "Katakana", value: "katakana" },
       ],
       selectedOption: "hiragana",
+      score: 0,
     };
   },
   watch: {
     currentInput(newValue, oldValue) {
       this.checkInput(newValue);
     },
-    selectedOption(newValue, oldValue) {
+    selectedOption() {
       this.initializeKana();
     },
   },
@@ -157,6 +162,7 @@ export default {
       this.answer = this.currentKana + " is " + this.currentRomaji;
     },
     updateFields() {
+      this.increaseScore();
       //hide answer because there's a split second where the currentInput differs from the currentRomaji/currentKana for some reason
       this.hideAnswer();
       this.currentKana = this.currentArray[this.currentIndex].kana;
@@ -165,6 +171,12 @@ export default {
         this.currentInput = "";
         this.answer = "";
       }, 20);
+    },
+    increaseScore() {
+      this.score++;
+    },
+    resetScore() {
+      this.score = 0;
     },
     hideAnswer() {
       this.showAnswer = false;
@@ -175,6 +187,7 @@ export default {
 
     initializeKana() {
       this.currentIndex = 0;
+      this.resetScore();
       if (this.selectedOption === "hiragana") {
         this.currentArray = this.hiragana;
       } else {
@@ -191,7 +204,7 @@ export default {
 <style scoped>
 .radio-group-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
