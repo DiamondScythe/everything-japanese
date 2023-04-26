@@ -3,12 +3,15 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import GrammarView from "../views/grammar/GrammarView.vue";
 import GrammarLearnView from "../views/grammar/GrammarLearnView.vue";
+import GrammarDetailsView from "../views/grammar/GrammarDetailsView.vue";
 import LoginView from "../views/auth/LoginView.vue";
 import WatchView from "../views/WatchView.vue";
 import LandingView from "../views/LandingView.vue";
 import ReviewView from "../views/review/ReviewView.vue";
 import KanaView from "../views/kana/KanaView.vue";
 import VocabView from "../views/vocab/VocabView.vue";
+import VocabDetailsView from "../views/vocab/VocabDetailsView.vue";
+import VocabLearnView from "../views/vocab/VocabLearnView.vue";
 
 import { getJwtToken } from "@/utils/auth";
 import axios from "axios";
@@ -33,6 +36,13 @@ const routes = [
     path: "/grammar/learn/:id",
     name: "Grammar learn",
     component: GrammarLearnView,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/grammar/details/:id",
+    name: "Grammar details",
+    component: GrammarDetailsView,
     meta: { requiresAuth: true },
     props: true,
   },
@@ -72,6 +82,20 @@ const routes = [
     name: "Vocab",
     component: VocabView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/vocab/details/:id",
+    name: "Vocab details",
+    component: VocabDetailsView,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/vocab/learn/:id",
+    name: "Vocab learn",
+    component: VocabLearnView,
+    meta: { requiresAuth: true },
+    props: true,
   },
 ];
 
