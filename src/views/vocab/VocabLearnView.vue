@@ -35,8 +35,14 @@
               <v-btn
                 text
                 color="primary"
+                @click="playAudio(card.wordAudioFileName)"
+                >Play word</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
                 @click="playAudio(card.exampleAudioFileName)"
-                >Play audio</v-btn
+                >Play example</v-btn
               >
             </v-col>
           </v-row>
@@ -115,6 +121,7 @@ export default {
           examples: this.examples,
           userId: this.user._id,
           lessonNumber: this.lessons.lessonNumber,
+          type: "Vocab",
         })
         .then((res) => {
           console.log(res);

@@ -11,37 +11,86 @@
           height="420px"
           width="1000px"
         >
-          <v-row>
-            <v-col sm="12" lg="6" offset-lg="3">
-              <v-card-title class="justify-center"></v-card-title>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col sm="12" lg="6" offset-lg="3">
-              <v-card-title class="justify-center">{{
-                currentCard.card
-              }}</v-card-title>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col sm="12" lg="6" offset-lg="3">
-              <div class="audio-button">
-                <v-btn
-                  text
-                  color="primary"
-                  @click="playAudio(currentCard.audioFileName)"
-                  >Play audio</v-btn
-                >
-              </div>
-            </v-col>
-          </v-row>
-          <v-row v-if="showAnswer">
-            <v-col sm="12" lg="6" offset-lg="3">
-              <v-card-title class="justify-center">{{
-                currentCard.translation
-              }}</v-card-title>
-            </v-col>
-          </v-row>
+          <div v-if="currentCard.type === 'Grammar'">
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center"></v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center">{{
+                  currentCard.card
+                }}</v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <div class="audio-button">
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="playAudio(currentCard.exampleAudioFileName)"
+                    >Play audio</v-btn
+                  >
+                </div>
+              </v-col>
+            </v-row>
+            <v-row v-if="showAnswer">
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center">{{
+                  currentCard.translation
+                }}</v-card-title>
+              </v-col>
+            </v-row>
+          </div>
+          <!--if type = vocab, show vocab type card-->
+          <div v-else>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center"></v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="main-word">{{
+                  currentCard.word
+                }}</v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center">{{
+                  currentCard.card
+                }}</v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <div class="audio-button">
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="playAudio(currentCard.wordAudioFileName)"
+                    >Play word</v-btn
+                  >
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="playAudio(currentCard.exampleAudioFileName)"
+                    >Play sentence</v-btn
+                  >
+                </div>
+              </v-col>
+            </v-row>
+            <v-row v-if="showAnswer">
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card-title class="justify-center">{{
+                  currentCard.translation
+                }}</v-card-title>
+              </v-col>
+            </v-row>
+          </div>
         </v-card>
       </v-container>
       <div v-if="!showAnswer" class="answer-container">
@@ -229,6 +278,11 @@ export default {
 </script>
 
 <style scoped>
+.main-word {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
 .card-container {
   padding-top: 50px;
   display: flex;

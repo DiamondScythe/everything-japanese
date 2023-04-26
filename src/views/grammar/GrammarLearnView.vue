@@ -32,7 +32,10 @@
           </v-row>
           <v-row v-if="card.type === 'Example'">
             <v-col sm="12" lg="10" offset-lg="1">
-              <v-btn text color="primary" @click="playAudio(card.audioFileName)"
+              <v-btn
+                text
+                color="primary"
+                @click="playAudio(card.exampleAudioFileName)"
                 >Play audio</v-btn
               >
             </v-col>
@@ -95,6 +98,7 @@ export default {
           examples: this.examples,
           userId: this.user._id,
           lessonNumber: this.lessons.lessonNumber,
+          type: "Grammar",
         })
         .then((res) => {
           console.log(res);
@@ -155,7 +159,7 @@ export default {
               id: id++,
               type: "Example",
               text: `${example.example} - ${example.translation}`,
-              audioFileName: example.audioFileName,
+              exampleAudioFileName: example.exampleAudioFileName,
             };
 
             cards.push(exampleCard);
