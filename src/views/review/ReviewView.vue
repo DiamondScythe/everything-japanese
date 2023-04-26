@@ -8,7 +8,7 @@
           outlined
           shaped
           tile
-          height="420px"
+          height="620px"
           width="1000px"
         >
           <div v-if="currentCard.type === 'Grammar'">
@@ -31,7 +31,7 @@
                     text
                     color="primary"
                     @click="playAudio(currentCard.exampleAudioFileName)"
-                    >Play audio</v-btn
+                    >Play example</v-btn
                   >
                 </div>
               </v-col>
@@ -81,6 +81,20 @@
                     >Play sentence</v-btn
                   >
                 </div>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col sm="12" lg="6" offset-lg="3">
+                <v-card class="justify-center" height="200px">
+                  <v-img
+                    :src="imageUrl"
+                    alt="Illustration"
+                    style=""
+                    class="mx-auto"
+                    height="100%"
+                  >
+                  </v-img>
+                </v-card>
               </v-col>
             </v-row>
             <v-row v-if="showAnswer">
@@ -212,6 +226,11 @@ export default {
     }
   },
   components: {},
+  computed: {
+    imageUrl() {
+      return "http://localhost:3000/images/" + this.currentCard.imageFileName;
+    },
+  },
   methods: {
     updateFlashcards() {
       axios
