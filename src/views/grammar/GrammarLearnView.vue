@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{ completedGrammarLessons }}
     <v-container class="card-container">
       <v-slide-x-transition mode="out-in">
         <v-card
@@ -74,10 +75,32 @@ export default {
       lessons: [],
       cards: [],
       examples: [],
+      completedGrammarLessons: [],
       user: {},
+      userId: "",
       activeCardIndex: 0,
       transition: false,
     };
+  },
+  async mounted() {
+    axios
+      .get(`http://localhost:3000/api/oneGrammar/` + this.id)
+      .then((res) => {
+        this.lessons = res.data.grammar;
+        this.parts = res.data.grammar.parts;
+        this.cards = this.convertToCardsArray(this.lessons);
+        this.examples = this.convertPartsToExamplesArray(this.parts);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const info = await checkAuthStatus();
+    if (info) {
+      this.user = info.user;
+      this.userId = info.user._id;
+      this.completedGrammarLessons = info.user.data.completedLessons.grammar;
+    }
   },
   computed: {
     isFinalCard() {
@@ -85,10 +108,17 @@ export default {
     },
     nextText() {
       if (this.isFinalCard) {
-        return "Finish lesson and add flashcards to your deck";
+        if (this.isCompletedLesson) {
+          return "Finish lesson";
+        } else {
+          return "Finish lesson and add flashcards to your deck";
+        }
       } else {
         return "Next";
       }
+    },
+    isCompletedLesson() {
+      return this.completedGrammarLessons.includes(this.lessons.lessonNumber);
     },
   },
   methods: {
@@ -106,6 +136,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
+      axios.post(`http://localhost:3000/user/addCompletedGrammarLesson/`, {
+        id: this.user._id,
+        lessonNumber: this.lessons.lessonNumber,
+      });
     },
     previousCard() {
       // Perform any necessary actions based on the discarded card
@@ -191,31 +226,15 @@ export default {
       });
     },
     finishLesson() {
-      this.addFlashcards();
+      if (!this.isCompletedLesson) {
+        this.addFlashcards();
+      }
       this.$router.push({ name: "Home" });
     },
     playAudio(audioFileName) {
       const audio = new Audio(`http://localhost:3000/audio/${audioFileName}`);
       audio.play();
     },
-  },
-  async mounted() {
-    axios
-      .get(`http://localhost:3000/api/oneGrammar/` + this.id)
-      .then((res) => {
-        this.lessons = res.data.grammar;
-        this.parts = res.data.grammar.parts;
-        this.cards = this.convertToCardsArray(this.lessons);
-        this.examples = this.convertPartsToExamplesArray(this.parts);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    const info = await checkAuthStatus();
-    if (info) {
-      this.user = info.user;
-    }
   },
 };
 </script>

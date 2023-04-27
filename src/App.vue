@@ -103,8 +103,6 @@ export default {
       //get user data here
       this.isAuthenticated = info.isAuthenticated;
       this.user = info.user;
-      console.log(this.isAuthenticated);
-      console.log(this.user);
     } else {
       this.isAuthenticated = false;
     }

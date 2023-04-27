@@ -119,7 +119,6 @@ router.beforeEach((to, from, next) => {
         })
         .then((response) => {
           if (response.data.isAuthenticated) {
-            console.log("User info:", response.data.user);
             next();
           } else {
             next("/login");

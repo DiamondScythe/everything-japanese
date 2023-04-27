@@ -91,10 +91,32 @@ export default {
       lessons: [],
       cards: [],
       examples: [],
+      completedVocabLessons: [],
       user: {},
+      userId: "",
       activeCardIndex: 0,
       transition: false,
     };
+  },
+  async mounted() {
+    axios
+      .get(`http://localhost:3000/api/oneVocab/` + this.id)
+      .then((res) => {
+        this.lessons = res.data.vocab;
+        this.parts = res.data.vocab.parts;
+        this.cards = this.convertToCardsArray(this.lessons);
+        this.examples = this.convertPartsToExamplesArray(this.parts);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const info = await checkAuthStatus();
+    if (info) {
+      this.user = info.user;
+      this.userId = info.user._id;
+      this.completedVocabLessons = info.user.data.completedLessons.vocab;
+    }
   },
   computed: {
     isFinalCard() {
@@ -102,7 +124,11 @@ export default {
     },
     nextText() {
       if (this.isFinalCard) {
-        return "Finish lesson and add flashcards to your deck";
+        if (this.isCompletedLesson) {
+          return "Finish lesson";
+        } else {
+          return "Finish lesson and add flashcards to your deck";
+        }
       } else {
         return "Next";
       }
@@ -112,6 +138,9 @@ export default {
         "http://localhost:3000/images/" +
         this.cards[this.activeCardIndex].imageFileName
       );
+    },
+    isCompletedLesson() {
+      return this.completedVocabLessons.includes(this.lessons.lessonNumber);
     },
   },
   methods: {
@@ -129,6 +158,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
+      axios.post(`http://localhost:3000/user/addCompletedVocabLesson`, {
+        id: this.user._id,
+        lessonNumber: this.id,
+      });
     },
     previousCard() {
       // Perform any necessary actions based on the discarded card
@@ -216,31 +250,16 @@ export default {
       });
     },
     finishLesson() {
-      this.addFlashcards();
+      if (!this.isCompletedLesson) {
+        this.addFlashcards();
+      }
+
       this.$router.push({ name: "Home" });
     },
     playAudio(audioFileName) {
       const audio = new Audio(`http://localhost:3000/audio/${audioFileName}`);
       audio.play();
     },
-  },
-  async mounted() {
-    axios
-      .get(`http://localhost:3000/api/oneVocab/` + this.id)
-      .then((res) => {
-        this.lessons = res.data.vocab;
-        this.parts = res.data.vocab.parts;
-        this.cards = this.convertToCardsArray(this.lessons);
-        this.examples = this.convertPartsToExamplesArray(this.parts);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    const info = await checkAuthStatus();
-    if (info) {
-      this.user = info.user;
-    }
   },
 };
 </script>

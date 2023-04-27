@@ -36,6 +36,7 @@
 
 <script>
 import axios from "axios";
+import { checkAuthStatus } from "../../utils/auth.js";
 
 export default {
   name: "VocabDetailsView",
@@ -45,13 +46,20 @@ export default {
       vocab: {},
     };
   },
-  mounted() {
+  async mounted() {
     axios
       .get("http://localhost:3000/api/oneVocab/" + this.id)
       .then((response) => {
         this.vocab = response.data.vocab;
         console.log(response.data);
       });
+
+    //get user info
+    const info = await checkAuthStatus();
+    if (info) {
+      this.user = info.user;
+      console.log(this.user);
+    }
   },
   computed: {
     exampleCount() {
