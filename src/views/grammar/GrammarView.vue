@@ -15,7 +15,7 @@
         <v-col
           v-for="lesson in grammar"
           :key="lesson.lessonNumber"
-          :to="'/grammar/learn/' + lesson.lessonNumber"
+          :to="'/grammar/details/' + lesson.lessonNumber"
           cols="6"
           md="2"
         >
@@ -23,7 +23,7 @@
             <v-card style="height: 100%">
               <v-card-text style="color: black">
                 <router-link
-                  :to="'/grammar/learn/' + lesson.lessonNumber"
+                  :to="'/grammar/details/' + lesson.lessonNumber"
                   tag="a"
                   style="color: inherit; text-decoration: none"
                 >
