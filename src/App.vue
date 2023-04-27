@@ -60,7 +60,7 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app src="japan3.jpg" v-if="showAppBar">
+    <v-app-bar app src="https://i.imgur.com/4N4nWqh.jpg" v-if="showAppBar">
       <v-app-bar-nav-icon
         v-if="showDrawer"
         @click="drawer = !drawer"

@@ -4,7 +4,7 @@
       <a
         id="yg-widget-0"
         class="youglish-widget"
-        data-query="天罰"
+        :data-query="word"
         data-lang="japanese"
         data-zones="all"
         data-components="8415"
@@ -19,6 +19,11 @@
 
 <script>
 export default {
+  name: "YouGlishWidget",
+  props: ["word"],
+  data() {
+    return {};
+  },
   mounted() {
     const script = document.createElement("script");
     script.async = true;

@@ -61,9 +61,11 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/watch",
+    path: "/watch/:word",
     name: "Watch",
     component: WatchView,
+    meta: { requiresAuth: true },
+    props: true,
   },
   {
     path: "/review",

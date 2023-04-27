@@ -12,12 +12,8 @@
           tile
           height="600px"
           width="1000px"
+          class="vocab-card"
         >
-          <v-row>
-            <v-col sm="12" lg="6" offset-lg="3">
-              <v-card-title class="justify-center"></v-card-title>
-            </v-col>
-          </v-row>
           <v-row>
             <v-col sm="12" lg="10" offset-lg="1">
               <v-card-title>{{ card.type }}</v-card-title></v-col
@@ -56,6 +52,15 @@
               >
               </v-img>
             </v-col>
+          </v-row>
+          <v-row v-if="card.type === 'Example'">
+            <div class="more-examples">
+              <div>
+                <a href="#" @click.prevent="openYougish(card.word)">
+                  View more examples for {{ card.word }}</a
+                >
+              </div>
+            </div>
           </v-row>
         </v-card>
       </v-slide-x-transition>
@@ -216,6 +221,7 @@ export default {
               id: id++,
               type: "Example",
               text: `${example.example} - ${example.translation}`,
+              word: example.word,
               exampleAudioFileName: example.exampleAudioFileName,
               wordAudioFileName: example.wordAudioFileName,
               imageFileName: example.imageFileName,
@@ -260,6 +266,10 @@ export default {
       const audio = new Audio(`http://localhost:3000/audio/${audioFileName}`);
       audio.play();
     },
+    openYougish(word) {
+      //redirect to watch page with word as prop in new tab
+      window.open(`http://localhost:8080/watch/${word}`, "_blank");
+    },
   },
 };
 </script>
@@ -276,13 +286,22 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.vocab-card {
+  padding-top: 20px;
+}
+.more-examples {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* .container {
-    border: 1px solid green;
-  }
-  .row {
-    border: 1px solid red;
-  }
-  .col {
-    border: 1px solid blue;
-  } */
+  border: 1px solid green;
+}
+.row {
+  border: 1px solid red;
+}
+.col {
+  border: 1px solid blue;
+} */
 </style>
