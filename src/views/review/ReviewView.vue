@@ -215,7 +215,7 @@ export default {
       showReview: true,
       dialog: false,
       noFlashcardsMessage:
-        "You have no flashcards to review right now. Check back later, or add some flashcards to your deck by finishing new lessons!",
+        "Congratulations, you have no flashcards to review right now. Check back later, or add some flashcards to your deck by finishing new lessons!",
     };
   },
   async mounted() {
@@ -303,7 +303,7 @@ export default {
   justify-content: center;
 }
 .card-container {
-  padding-top: 50px;
+  padding-top: 5px;
   display: flex;
   justify-content: center;
   align-items: center;

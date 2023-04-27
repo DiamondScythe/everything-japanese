@@ -2,11 +2,13 @@
   <div>
     <!-- { "_id": "6444e6259f57a76141c02d81", "lessonNumber": 1, "title": "State of being with だ
       and です", "details": "In this lesson, you'll learn how だ and です work. Good luck!"} -->
-
     <v-container>
-      <v-row>
+      <v-row
+        v-for="(vocab, difficulty) in lessonsByDifficulty"
+        :key="difficulty"
+      >
         <v-col class="mt-2" cols="12">
-          <strong>Beginner lessons</strong>
+          <strong>{{ difficulty }} lessons</strong>
         </v-col>
 
         <v-col
@@ -56,6 +58,18 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  computed: {
+    lessonsByDifficulty() {
+      return this.vocab.reduce((acc, lesson) => {
+        if (acc[lesson.difficulty]) {
+          acc[lesson.difficulty].push(lesson);
+        } else {
+          acc[lesson.difficulty] = [lesson];
+        }
+        return acc;
+      }, {});
+    },
   },
   components: {},
   methods: {},
