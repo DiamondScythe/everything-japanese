@@ -120,7 +120,11 @@ export default {
       return this.$route.path !== "/login" && this.$route.path !== "/welcome";
     },
     showAppBar() {
-      return this.$route.path !== "/";
+      return (
+        this.$route.path !== "/" &&
+        this.$route.path !== "/login" &&
+        this.$route.path !== "/signup"
+      );
     },
   },
   methods: {
