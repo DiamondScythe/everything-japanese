@@ -1,9 +1,11 @@
 <template>
   <div class="hello">
     <v-container>
-      <v-card>
+      <v-card class="main-card">
         <v-card-title> Welcome! </v-card-title>
-        <v-card-text> Your journey starts here... Good luck! </v-card-text>
+        <v-card-text>
+          Your awesome Japanese learning journey starts here... Good luck!
+        </v-card-text>
       </v-card>
     </v-container>
   </div>
@@ -18,20 +20,10 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.main-card {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style> -->
+</style>

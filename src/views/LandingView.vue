@@ -9,7 +9,9 @@
         <v-col cols="12" md="6">
           <h1 class="headline mb-3">Welcome to Everything Japanese</h1>
           <p class="subtitle">Your Japanese learning journey starts here</p>
-          <v-btn class="mt-5" color="primary" large>Get Started</v-btn>
+          <v-btn class="mt-5" color="primary" large :to="`/login`"
+            >Get Started</v-btn
+          >
         </v-col>
         <v-col cols="12" md="6">
           <v-img src="japan2.jpg" aspect-ratio="1.5"></v-img>

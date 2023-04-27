@@ -5,6 +5,7 @@ import GrammarView from "../views/grammar/GrammarView.vue";
 import GrammarLearnView from "../views/grammar/GrammarLearnView.vue";
 import GrammarDetailsView from "../views/grammar/GrammarDetailsView.vue";
 import LoginView from "../views/auth/LoginView.vue";
+import SignupView from "../views/auth/SignupView.vue";
 import WatchView from "../views/WatchView.vue";
 import LandingView from "../views/LandingView.vue";
 import ReviewView from "../views/review/ReviewView.vue";
@@ -59,6 +60,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginView,
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: SignupView,
   },
   {
     path: "/watch/:word",

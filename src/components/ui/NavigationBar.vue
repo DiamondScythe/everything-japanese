@@ -9,7 +9,7 @@
     <v-toolbar-title>Everything Japanese</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn text :to="`/login`">Login</v-btn>
-    <v-btn text>Signup</v-btn>
+    <v-btn text :to="`/signup`">Signup</v-btn>
   </v-app-bar>
 </template>
 
