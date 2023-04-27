@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <!-- Top Navigation -->
-    <v-app-bar color="white" app fixed clipped-left>
-      <v-toolbar-title>My App</v-toolbar-title>
+    <v-app-bar color="white" app src="japan3.jpg" fixed clipped-left>
+      <v-toolbar-title>Everything Japanese</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>Login</v-btn>
+      <v-btn text :to="`/login`">Login</v-btn>
       <v-btn text>Signup</v-btn>
     </v-app-bar>
 

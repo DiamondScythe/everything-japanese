@@ -150,7 +150,9 @@
     <!--for dialog-->
     <v-dialog v-model="dialog" width="500">
       <v-card>
-        <v-card-title class="text-h5 grey lighten-2"> How to use </v-card-title>
+        <v-toolbar color="primary" title="How to use">
+          <v-toolbar-title>How to use</v-toolbar-title>
+        </v-toolbar>
         <v-card-text></v-card-text>
         <v-card-text>
           <ul>

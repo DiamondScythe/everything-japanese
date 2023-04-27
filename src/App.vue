@@ -37,7 +37,7 @@
         </v-list-item>
       </v-list>
 
-      <div dense nav class="bottom-items">
+      <div dense nav class="bottom-items" @click="drawer = false">
         <v-list-item to="/profile" link>
           <v-list-item-icon>
             <v-icon>mdi-account-circle</v-icon>
@@ -48,7 +48,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item @click="logout">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
@@ -81,6 +81,7 @@
 
 <script>
 import { checkAuthStatus } from "@/utils/auth";
+import Cookies from "js-cookie";
 
 export default {
   data: () => ({
@@ -122,7 +123,12 @@ export default {
       return this.$route.path !== "/";
     },
   },
-  methods: {},
+  methods: {
+    logout() {
+      Cookies.remove("jwt");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 

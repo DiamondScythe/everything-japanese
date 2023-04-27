@@ -42,7 +42,9 @@ export default {
           },
           { withCredentials: true }
         )
-        .then((res) => {})
+        .then((res) => {
+          this.$router.push({ name: "Home" });
+        })
         .catch((err) => console.log(err));
     },
     reset() {
