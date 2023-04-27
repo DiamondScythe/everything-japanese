@@ -26,10 +26,12 @@
                   tag="a"
                   style="color: inherit; text-decoration: none"
                 >
-                  Lesson {{ lesson.lessonNumber }}:
-                  {{ lesson.title }}
+                  Lesson {{ lesson.lessonNumber }}: {{ lesson.title }}
                 </router-link>
               </v-card-text>
+              <v-card-text v-if="checkCompleted(lesson.lessonNumber)"
+                >(completed)</v-card-text
+              >
             </v-card>
           </v-sheet>
         </v-col>
@@ -39,6 +41,7 @@
 </template>
 
 <script>
+import { checkAuthStatus } from "@/utils/auth";
 import axios from "axios";
 
 export default {
@@ -46,9 +49,10 @@ export default {
   data() {
     return {
       vocab: [],
+      completedVocabLessons: [],
     };
   },
-  mounted() {
+  async mounted() {
     axios
       .get("http://localhost:3000/allVocab")
       .then((response) => {
@@ -58,6 +62,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+    const info = await checkAuthStatus();
+    if (info) {
+      this.completedVocabLessons = info.user.data.completedLessons.vocab;
+    }
   },
   computed: {
     lessonsByDifficulty() {
@@ -72,6 +81,10 @@ export default {
     },
   },
   components: {},
-  methods: {},
+  methods: {
+    checkCompleted(lessonNumber) {
+      return this.completedVocabLessons.includes(lessonNumber);
+    },
+  },
 };
 </script>

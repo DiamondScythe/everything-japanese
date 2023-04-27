@@ -31,6 +31,9 @@
                   {{ lesson.title }}
                 </router-link>
               </v-card-text>
+              <v-card-text v-if="checkCompleted(lesson.lessonNumber)"
+                >(completed)</v-card-text
+              >
             </v-card>
           </v-sheet>
         </v-col>
@@ -41,15 +44,17 @@
 
 <script>
 import axios from "axios";
+import { checkAuthStatus } from "@/utils/auth";
 
 export default {
   name: "GrammarView",
   data() {
     return {
       grammar: [],
+      completedGrammarLessons: [],
     };
   },
-  mounted() {
+  async mounted() {
     axios
       .get("http://localhost:3000/allGrammar")
       .then((response) => {
@@ -59,6 +64,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+    const info = await checkAuthStatus();
+    if (info) {
+      this.completedGrammarLessons = info.user.data.completedLessons.grammar;
+    }
   },
   computed: {
     lessonsByDifficulty() {
@@ -73,6 +83,10 @@ export default {
     },
   },
   components: {},
-  methods: {},
+  methods: {
+    checkCompleted(lessonNumber) {
+      return this.completedGrammarLessons.includes(lessonNumber);
+    },
+  },
 };
 </script>

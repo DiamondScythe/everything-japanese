@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    {{ completedGrammarLessons }}
     <v-container class="card-container">
       <v-slide-x-transition mode="out-in">
         <v-card
