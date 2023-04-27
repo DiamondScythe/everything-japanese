@@ -16,6 +16,13 @@
               </v-card-text>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col sm="12" lg="10" offset-lg="1">
+              <v-card-text style="color: black; white-space: pre-line">
+                Flashcards available for this lesson: <b>{{ exampleCount }}</b>
+              </v-card-text>
+            </v-col>
+          </v-row>
         </v-card>
         <div class="enter-div">
           <v-btn color="primary" @click="$router.push(`/vocab/learn/${id}`)"
@@ -46,6 +53,20 @@ export default {
         console.log(response.data);
       });
   },
+  computed: {
+    exampleCount() {
+      let count = 0;
+      if (this.vocab && this.vocab.parts) {
+        this.vocab.parts.forEach((part) => {
+          if (part.examples) {
+            count += part.examples.length;
+          }
+        });
+      }
+      return count;
+    },
+  },
+
   components: {},
   methods: {},
 };
