@@ -67,6 +67,12 @@ const routes = [
     component: SignupView,
   },
   {
+    path: "/watch",
+    name: "Watch examples",
+    component: WatchView,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/watch/:word",
     name: "Watch",
     component: WatchView,
