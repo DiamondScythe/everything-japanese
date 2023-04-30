@@ -2,23 +2,15 @@
 
 ## Project setup
 ```
-npm install
+npm install with a command prompt opened inside this folder
+
+if there are still module errors, delete package-lock.json files and retry the above step(s)
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
-```
+npm run serve -- --port 8080
 
-### Compiles and minifies for production
-```
-npm run build
-```
+(8080 is the default dev port, you can change it to a port from 8080-8085. Ports outside of this range will not work due to CORS restrictions.)
 
-### Lints and fixes files
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

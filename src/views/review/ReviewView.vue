@@ -85,16 +85,14 @@
             </v-row>
             <v-row>
               <v-col sm="12" lg="6" offset-lg="3">
-                <v-card class="justify-center" height="200px">
-                  <v-img
-                    :src="imageUrl"
-                    alt="Illustration"
-                    style=""
-                    class="mx-auto"
-                    height="100%"
-                  >
-                  </v-img>
-                </v-card>
+                <v-img
+                  :src="imageUrl"
+                  alt="Illustration"
+                  style="width: 200px; height: 200px; object-fit: contain"
+                  class="mx-auto"
+                  height="100%"
+                >
+                </v-img>
               </v-col>
             </v-row>
             <v-row v-if="showAnswer">
