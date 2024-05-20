@@ -2,6 +2,12 @@
 
 An experimental full-stack web application project for an all-in-one Japanese learning suite/platform with support for customizable, modular lessons and an SRS-based flashcard system that automatically generates flashcards from completed lessons. This Japanese learning application will cover everything from kana alphabet practice, to vocabulary and grammar lessons, and even looking up examples of words using Youglish's service inside the app.
 
+See also:
+
+[everything-japanese-server](https://github.com/DiamondScythe/everything-japanese-server)
+
+[everything-japanese-admin](https://github.com/DiamondScythe/everything-japanese-admin)
+
 # Screenshots:
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/d88e4a37-bc4a-456d-a7a6-17df4d2544bc)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/80dbf3ac-d375-4ed4-b8ce-cb5f43a5f395)
