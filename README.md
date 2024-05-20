@@ -6,6 +6,7 @@ An experimental full-stack web application project for an all-in-one Japanese le
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/d88e4a37-bc4a-456d-a7a6-17df4d2544bc)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/80dbf3ac-d375-4ed4-b8ce-cb5f43a5f395)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/d19a7860-c9df-4479-9973-61dca8fd4862)
+![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/d87925ff-e61b-4eac-9848-b876048bc498)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/4c146055-afb9-43c8-a70e-a4ab5cb8bf32)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/aad7a9a9-41e5-4782-a882-cd30bfe696aa)
 ![image](https://github.com/DiamondScythe/everything-japanese/assets/91442924/13a8901c-a989-4fb4-bb0d-c8194da7d571)
